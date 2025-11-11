@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kelompok 3 Meteorologi Terapan 2025</title>
+    <style>
+      body {
+        font-family: "Poppins", Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      /* =============================== */
+      /* 🌌 ANIMASI AWAL */
+      /* =============================== */
+      .intro {
+        position: fixed;
+        inset: 0;
+        background: black;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        animation: fadeInOut 10s ease-in-out infinite;
+        z-index: 999;
+      }
+
+      @keyframes fadeInOut {
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      .intro h1 {
+        font-size: 3rem;
+        letter-spacing: 3px;
+        animation: textFade 10s ease-in-out infinite;
+      }
+
+      @keyframes textFade {
+        0% { opacity: 0; transform: scale(0.9); }
+        20% { opacity: 1; transform: scale(1); }
+        80% { opacity: 1; transform: scale(1); }
+        100% { opacity: 0; transform: scale(1.1); }
+      }
+
+      .intro button {
+        margin-top: 20px;
+        padding: 12px 25px;
+        border: none;
+        background: #00bfff;
+        color: white;
+        font-size: 18px;
+        border-radius: 10px;
+        cursor: pointer;
+        display: none;
+        transition: all 0.3s ease;
+      }
+
+      .intro button:hover {
+        background: #0099cc;
+      }
+
+      /* =============================== */
+      /* 🌊 HALAMAN UTAMA */
+      /* =============================== */
+      .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(to top, #0099ff 0%, #87cefa 70%);
+        overflow: hidden;
+        z-index: 0;
+      }
+
+      .wave {
+        position: absolute;
+        bottom: 80px;
+        width: 200%;
+        height: 120px;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 1000px;
+        animation: waveMove 10s linear infinite;
+      }
+
+      .wave1 { bottom: 80px; opacity: 0.8; }
+      .wave2 { bottom: 70px; opacity: 0.5; animation-delay: 3s; }
+      .wave3 { bottom: 60px; opacity: 0.3; animation-delay: 6s; }
+
+      @keyframes waveMove {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+
+      .beach {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100px;
+        background: linear-gradient(to top, #f7d794 0%, #f9e8b2 100%);
+      }
+
+      /* =============================== */
+      /* 🎬 KONTEN UTAMA */
+      /* =============================== */
+      .container {
+        display: none;
+        position: relative;
+        z-index: 2;
+        max-width: 900px;
+        margin: auto;
+        background: rgba(255, 255, 255, 0.85);
+        padding: 40px;
+        border-radius: 25px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        animation: bounce 3s ease-in-out infinite alternate;
+        display: flex;
+        gap: 40px;
+        align-items: center;
+      }
+
+      @keyframes bounce {
+        0% { transform: translateY(0px); }
+        100% { transform: translateY(-8px); }
+      }
+
+      .text-content {
+        flex: 1;
+        text-align: left;
+      }
+
+      h1 { margin-bottom: 10px; font-size: 28px; color: #0077ff; }
+      .caption {
+        font-weight: 600;
+        margin-top: 15px;
+        font-size: 20px;
+        background: #e0f7ff;
+        display: inline-block;
+        padding: 8px 12px;
+        border-radius: 10px;
+      }
+
+      /* Tombol tambahan */
+      button {
+        background: #04d9ff;
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 15px;
+      }
+
+      button:hover {
+        background: #00bfff;
+        transform: scale(1.05);
+      }
+
+      /* 🎞️ Slideshow */
+      .slideshow {
+        flex: 0 0 10cm;
+        height: 20cm;
+        overflow: hidden;
+        border-radius: 20px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        position: relative;
+      }
+
+      .slideshow img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+
+      .slideshow img.active { opacity: 1; }
+    </style>
+  </head>
+
+  <body>
+    <!-- 🌌 INTRO -->
+    <div class="intro" id="intro">
+      <h1>METEOROLOGI TERAPAN</h1>
+      <button id="nextBtn">Selanjutnya</button>
+    </div>
+
+    <!-- 🌊 LATAR -->
+    <div class="background">
+      <div class="wave wave1"></div>
+      <div class="wave wave2"></div>
+      <div class="wave wave3"></div>
+      <div class="beach"></div>
+    </div>
+
+    <!-- 🌦 KONTEN UTAMA -->
+    <div class="container" id="mainContent">
+      <div class="text-content">
+        <h1>Kelompok 3 Meteorologi Terapan</h1>
+        <p class="caption">Zulkhair Al Amiri — 122290080</p>
+
+        <!-- ✅ Tombol "Open WebGIS" ditambahkan -->
+        <button onclick="masuk()"> Open WebGIS </button>
+      </div>
+
+      <div class="slideshow">
+        <img src="gambar/zul.jpg" alt="Zulkhair" class="active" data-name="Zulkhair Al-Amiri — 122290080">
+        <img src="gambar/claudia.jpg" alt="Claudia" data-name="Claudia Berliana Sitinjak — 122290061">
+        <img src="gambar/egga.jpg" alt="Egga" data-name="Egga Putra — 122290004">
+        <img src="gambar/mutiara.jpg" alt="Mutiara" data-name="Mutiara — 122290078">
+        <img src="gambar/tes.jpg" alt="Dameria" data-name="Dameria Erliasna Br Barus — 122290066">
+      </div>
+    </div>
+
+    <script>
+      const intro = document.getElementById("intro");
+      const nextBtn = document.getElementById("nextBtn");
+      const mainContent = document.getElementById("mainContent");
+
+      // Tombol muncul setelah 10 detik
+      setTimeout(() => {
+        nextBtn.style.display = "block";
+      }, 10000);
+
+      nextBtn.addEventListener("click", () => {
+        intro.style.display = "none";
+        mainContent.style.display = "flex";
+      });
+
+      // Slideshow berganti tiap 5 detik
+      const slides = document.querySelectorAll(".slideshow img");
+      const caption = document.querySelector(".caption");
+      let index = 0;
+
+      setInterval(() => {
+        slides[index].classList.remove("active");
+        index = (index + 1) % slides.length;
+        slides[index].classList.add("active");
+        caption.textContent = slides[index].dataset.name;
+      }, 5000);
+
+      // ✅ Fungsi menuju halaman WebGIS
+      function masuk() {
+        window.location.href = "kelompok3.html";
+      }
+    </script>
+  </body>
+</html>

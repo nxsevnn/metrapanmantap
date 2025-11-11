@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WebGIS Gabungan - Meteorologi Terapan 2025</title>
+    <style>
+      /* 🌤 Umum */
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        background: linear-gradient(to top, #a8b4e0, #e3e7f7);
+        color: #000;
+        text-align: center;
+      }
+
+      header {
+        background: linear-gradient(135deg, #1b3b87, #4a77ff);
+        color: white;
+        padding: 20px 0;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      header .title {
+        margin: 0;
+        font-size: 26px;
+        font-weight: 600;
+      }
+
+      header .nav {
+        margin-top: 10px;
+      }
+
+      header .nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 10px;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+
+      header .nav a:hover {
+        text-decoration: underline;
+      }
+
+      main {
+        padding: 30px 20px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .hero {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
+
+      .hero h2 {
+        color: #1b3b87;
+        margin-bottom: 10px;
+      }
+
+      .lead {
+        font-size: 16px;
+        line-height: 1.6;
+        text-align: justify;
+        margin-bottom: 15px;
+      }
+
+      .keypoints {
+        list-style: none;
+        padding: 0;
+      }
+
+      .keypoints li {
+        margin: 5px 0;
+        background: #eaf0ff;
+        padding: 8px 12px;
+        border-radius: 10px;
+        display: inline-block;
+      }
+
+      /* 🌍 Tombol ganti peta */
+      .buttons {
+        margin: 15px 0 25px 0;
+      }
+
+      button {
+        background-color: #1b3b87;
+        border: none;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 10px;
+        cursor: pointer;
+        margin: 5px;
+        transition: 0.3s;
+        font-size: 15px;
+      }
+
+      button:hover {
+        background-color: #3559e0;
+        transform: scale(1.05);
+      }
+
+      iframe {
+        width: 95%;
+        height: 600px;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        margin-bottom: 40px;
+      }
+
+      .grid.duo {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        text-align: left;
+      }
+
+      .card h3 {
+        color: #00a2e8;
+      }
+
+      footer {
+        background: #1b3b87;
+        color: #f3f3f3;
+        padding: 15px 0;
+        margin-top: 40px;
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 🌤 HEADER -->
+    <header role="banner">
+      <div class="wrap">
+        <h1 class="title"> Praktikum Meteorologi Terapan 2025</h1>
+        <nav class="nav" role="navigation" aria-label="Navigasi utama">
+          <a href="#peta">Peta</a>
+          <a href="#sumber">Sumber</a>
+          <a href="#tentang">Tentang</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- 🌍 MAIN CONTENT -->
+    <main class="main wrap" role="main">
+      <!-- 🧭 HERO -->
+      <section class="hero">
+        <h2>METEOROLOGI TERAPAN 2025</h2>
+        <p class="lead">
+          Website ini merupakan hasil dari seluruh modul yang pernah dijalankan
+          selama praktikum Meteorologi Terapan tahun 2025. Website ini didasari
+          oleh struktur <code>qgis2web</code> yang dapat diperoleh dari ekstensi
+          aplikasi QGIS.
+        </p>
+        <ul class="keypoints">
+          <li>Modul 1 : Pengunduhan Data Meteorologi (ERA5)</li>
+          <li>Modul 2 : Inventarisasi Emisi</li>
+          <li>Modul 3 : Model AERMOD</li>
+          <li>Modul 4 : Model HYSPLIT</li>
+        </ul>
+      </section>
+
+      <!-- 🗺 PETA WEBGIS -->
+      <section id="peta" aria-label="Peta WebGIS">
+        <h2> WebGIS Gabungan Praktikum 2025 </h2>
+
+        <div class="buttons">
+          <button onclick="tampilkan(1)">Peta 1 - SUMBER GARIS & AREA</button>
+          <button onclick="tampilkan(2)">Peta 2 - AERMOD</button>
+          <button onclick="tampilkan(3)">Peta 3 - WRPLOT</button>
+          <button onclick="tampilkan(4)">Peta 4 - HYSPLIT</button>
+        </div>
+
+        <iframe id="petaFrame" src="qgis2web_1/index.html" title="Peta WebGIS Gabungan"></iframe>
+      </section>
+
+      <!-- 📊 Sumber Data & Tentang -->
+      <section class="grid duo" id="sumber" aria-labelledby="sumber-title">
+        <div class="card">
+          <h3 id="sumber-title">Sumber Data</h3>
+          <ul>
+            <li>Windrose : ECMWF Reanalysis 5 (ERA5)</li>
+            <li>Inventarisasi Emisi-AERMOD : Data Primer (Observasi)</li>
+            <li>Model HYSPLIT : Global Forecast System (GFS)</li>
+            <li>Basemap : Carto Positron DB</li>
+          </ul>
+        </div>
+
+        <div class="card" id="tentang" aria-labelledby="tentang-title">
+          <h3 id="tentang-title">Tentang</h3>
+          <p>
+            Website ini dikembangkan sebagai bentuk publikasi interaktif hasil
+            praktikum Meteorologi Terapan ITERA. Berbasis <b>QGIS</b> dan
+            <b>qgis2web</b>, peta-peta ini dapat dieksplorasi langsung melalui
+            browser.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- ⚓ FOOTER -->
+    <footer role="contentinfo">
+      <div class="wrap">
+        <small>© 2025 • Meteorologi Terapan ITERA</small>
+      </div>
+    </footer>
+
+    <!-- 🧠 SCRIPT GANTI PETA -->
+    <script>
+      function tampilkan(nomor) {
+        const iframe = document.getElementById("petaFrame");
+        const daftar = {
+          1: "qgis2web_1/index.html",
+          2: "qgis2web_2/index.html",
+          3: "qgis2web_3/index.html",
+          4: "qgis2web_4/index.html",
+        };
+        iframe.src = daftar[nomor];
+      }
+    </script>
+  </body>
+</html>
